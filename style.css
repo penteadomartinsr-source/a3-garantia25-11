@@ -1,0 +1,188 @@
+/* =====================================================
+   style.css — Sistema de Controle de Tarefas
+   Layout simples, limpo e responsivo
+   ===================================================== */
+
+/* ---------- Variáveis de cor (facilitam manutenção) ---------- */
+:root {
+  --cor-fundo: #f3f5f9;
+  --cor-card: #ffffff;
+  --cor-texto: #243040;
+  --cor-texto-suave: #6b778a;
+  --cor-borda: #d9dfe8;
+  --cor-primaria: #2f6fed;
+  --cor-primaria-escura: #2457bf;
+  --cor-erro: #c62828;
+  --cor-erro-fundo: #fdecea;
+  --cor-sucesso: #1b7f3b;
+  --cor-sucesso-fundo: #e6f6ea;
+  --raio: 8px;
+}
+
+/* ---------- Reset básico ---------- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  line-height: 1.5;
+}
+
+/* ---------- Cabeçalho e rodapé ---------- */
+.topo {
+  background: var(--cor-primaria);
+  color: #fff;
+  text-align: center;
+  padding: 24px 16px;
+}
+.topo h1 { margin: 0 0 4px; font-size: 1.6rem; }
+.topo p  { margin: 0; opacity: .85; font-size: .95rem; }
+
+.rodape {
+  text-align: center;
+  padding: 20px;
+  color: var(--cor-texto-suave);
+}
+
+/* ---------- Container e cards ---------- */
+.container {
+  max-width: 1050px;
+  margin: 24px auto;
+  padding: 0 16px;
+  display: grid;
+  gap: 24px;
+}
+
+.card {
+  background: var(--cor-card);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 24px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .04);
+}
+.card h2 { margin-top: 0; font-size: 1.2rem; }
+
+/* ---------- Formulário ---------- */
+.campo { display: flex; flex-direction: column; margin-bottom: 16px; flex: 1; }
+.linha { display: flex; gap: 16px; flex-wrap: wrap; }
+.linha .campo { min-width: 200px; }
+
+label { font-weight: 600; margin-bottom: 6px; font-size: .9rem; }
+
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+  padding: 10px 12px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  font: inherit;
+  background: #fff;
+  color: var(--cor-texto);
+}
+textarea { resize: vertical; }
+
+input:focus, textarea:focus, select:focus {
+  outline: 2px solid rgba(47, 111, 237, .35);
+  border-color: var(--cor-primaria);
+}
+
+/* Campo com erro recebe borda vermelha */
+.invalido { border-color: var(--cor-erro) !important; }
+
+/* ---------- Mensagens de erro / sucesso ---------- */
+.mensagens:empty { display: none; }
+.mensagens {
+  border-radius: var(--raio);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: .95rem;
+}
+.mensagens.erro {
+  background: var(--cor-erro-fundo);
+  color: var(--cor-erro);
+  border: 1px solid var(--cor-erro);
+}
+.mensagens.sucesso {
+  background: var(--cor-sucesso-fundo);
+  color: var(--cor-sucesso);
+  border: 1px solid var(--cor-sucesso);
+}
+.mensagens ul { margin: 0; padding-left: 20px; }
+
+/* ---------- Botões ---------- */
+.acoes { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn {
+  border: none;
+  border-radius: var(--raio);
+  padding: 10px 18px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s;
+}
+.btn-primario { background: var(--cor-primaria); color: #fff; }
+.btn-primario:hover { background: var(--cor-primaria-escura); }
+.btn-secundario { background: #e8ecf3; color: var(--cor-texto); }
+.btn-secundario:hover { background: #d9dfe8; }
+
+.btn-pequeno { padding: 6px 12px; font-size: .85rem; }
+.btn-editar  { background: #fff3cd; color: #7a5b00; }
+.btn-editar:hover  { background: #ffe9a3; }
+.btn-excluir { background: var(--cor-erro-fundo); color: var(--cor-erro); }
+.btn-excluir:hover { background: #f9c9c4; }
+
+/* ---------- Tabela ---------- */
+.tabela-wrapper { overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td {
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--cor-borda);
+  vertical-align: middle;
+}
+th {
+  background: #f7f9fc;
+  font-size: .85rem;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  color: var(--cor-texto-suave);
+}
+tbody tr:hover { background: #fafbfd; }
+
+td.acoes-celula { white-space: nowrap; }
+td.acoes-celula .btn { margin-right: 6px; }
+
+.desc-celula { color: var(--cor-texto-suave); max-width: 260px; }
+
+/* Destaque para tarefas vencidas e não concluídas */
+.vencida { color: var(--cor-erro); font-weight: 600; }
+
+/* Linha em edição */
+tr.em-edicao { background: #fffbea; }
+
+/* Select de status dentro da tabela */
+.select-status { padding: 6px 8px; font-size: .9rem; }
+
+.contador {
+  display: inline-block;
+  background: var(--cor-primaria);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0 10px;
+  font-size: .8rem;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.vazio { color: var(--cor-texto-suave); text-align: center; padding: 16px 0; }
+
+/* ---------- Responsividade ---------- */
+@media (max-width: 640px) {
+  .topo h1 { font-size: 1.3rem; }
+  .card { padding: 16px; }
+}

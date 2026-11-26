@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle de Tarefas</title>
+  <!-- Folha de estilos externa -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topo">
+    <h1>Sistema de Controle de Tarefas</h1>
+    <p>Projeto acadêmico — Garantia da Qualidade de Software</p>
+  </header>
+
+  <main class="container">
+
+    <!-- =========================== FORMULÁRIO =========================== -->
+    <section class="card" aria-labelledby="titulo-form">
+      <h2 id="titulo-form">Cadastrar Tarefa</h2>
+
+      <!-- novalidate: desativa a validação nativa do navegador para que
+           a validação JS (testável) seja a única fonte de verdade -->
+      <form id="form-tarefa" novalidate>
+        <!-- Campo oculto: guarda o ID quando estamos editando -->
+        <input type="hidden" id="tarefa-id" name="id">
+
+        <div class="campo">
+          <label for="titulo">Título *</label>
+          <input type="text" id="titulo" name="titulo" placeholder="Ex.: Entregar relatório" data-testid="campo-titulo">
+        </div>
+
+        <div class="campo">
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" name="descricao" rows="3" placeholder="Detalhes opcionais" data-testid="campo-descricao"></textarea>
+        </div>
+
+        <div class="linha">
+          <div class="campo">
+            <label for="responsavel">Responsável *</label>
+            <input type="text" id="responsavel" name="responsavel" placeholder="Nome do responsável" data-testid="campo-responsavel">
+          </div>
+
+          <div class="campo">
+            <label for="vencimento">Data de Vencimento *</label>
+            <input type="date" id="vencimento" name="vencimento" data-testid="campo-vencimento">
+          </div>
+
+          <div class="campo">
+            <label for="status">Status</label>
+            <select id="status" name="status" data-testid="campo-status">
+              <option value="Pendente" selected>Pendente</option>
+              <option value="Em andamento">Em andamento</option>
+              <option value="Concluída">Concluída</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Área de mensagens (erro em vermelho / sucesso em verde) -->
+        <div id="mensagens" class="mensagens" role="alert" aria-live="polite" data-testid="mensagens"></div>
+
+        <div class="acoes">
+          <button type="submit" id="btn-salvar" class="btn btn-primario" data-testid="btn-salvar">Salvar Tarefa</button>
+          <button type="button" id="btn-cancelar" class="btn btn-secundario" data-testid="btn-cancelar" hidden>Cancelar edição</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ============================ LISTAGEM ============================ -->
+    <section class="card" aria-labelledby="titulo-lista">
+      <h2 id="titulo-lista">Tarefas Cadastradas <span id="contador" class="contador">0</span></h2>
+
+      <p id="lista-vazia" class="vazio" data-testid="lista-vazia">Nenhuma tarefa cadastrada.</p>
+
+      <div class="tabela-wrapper">
+        <table id="tabela-tarefas" data-testid="tabela-tarefas" hidden>
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Descrição</th>
+              <th>Responsável</th>
+              <th>Vencimento</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="corpo-tabela"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <small>Dados armazenados localmente (LocalStorage) neste navegador.</small>
+  </footer>
+
+  <!-- Script principal -->
+  <script src="script.js"></script>
+</body>
+</html>
